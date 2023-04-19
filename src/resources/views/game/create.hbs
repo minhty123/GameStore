@@ -1,0 +1,64 @@
+<div class="mt-4">
+    <h3>Add Game</h3>
+    <form class="mt-4" method="post" action="/games/store">
+        <div class="form-group">
+            <label for="name">Tên Game</label>
+            <input type="text" class="form-control" id="name" name = "name">
+        </div>      
+        <div class="form-group">
+            <label for="Publisher">Nhà phát hành</label>
+            <input type="text" class="form-control" id="Publisher" name = "Publisher">
+        </div>
+        <div class="form-group">
+            <label for="Release_date">Ngày phát hành</label>
+            <input type="text" class="form-control" id="Release_date" name = "Release_date">
+        </div>
+        <div class="form-group">
+            <label for="Type">Thể loại</label>
+            {{#each category}}
+            <input type="checkbox" name = "Type" value="{{this.name}}">   
+                <label>{{this.name}}</label>      
+            </input>
+            {{/each}}
+        </div>
+
+        <div class="form-group">
+            <label for="Language">Ngôn ngữ</label>
+            <input type="checkbox" name = "Language" value="Tiếng Anh">   
+                <label>Tiếng Anh</label>      
+            </input>      
+            <input type="checkbox" name = "Language" value="Tiếng Việt">   
+                <label>Tiếng Việt</label>      
+            </input>   
+            <input type="checkbox" name = "Language" value="Tiếng Trung">   
+                <label>Tiếng Trung</label>      
+            </input>     
+        </div>
+        
+        <div class="form-group">
+            <label for="Capacity">Dung lượng</label>
+            <input type="text" class="form-control" id="Capacity" name = "Capacity">
+        </div>
+        <div class="form-group">
+            <label for="Configuration">Cấu hình</label>
+            <input type="text" class="form-control" id="Configuration" name = "Configuration">
+        </div>
+        
+        <div class="form-group">
+            <label for="Development">Dòng game</label>
+            <select id="Development" name = "Development">      
+                <option>Indie</option>
+                <option>Bom Tấn (AAA) </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Filedl">Link Download</label>
+            <input type="text" class="form-control" id="Filedl" name = "Filedl">
+        </div>  
+        <div class="form-group">
+            <label for="Image">Image</label>
+            <input type="text" class="form-control" id="Image" name = "Image">
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>

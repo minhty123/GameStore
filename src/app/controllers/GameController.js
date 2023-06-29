@@ -1,4 +1,5 @@
 const Game = require("../models/Game");
+const User = require("../models/User");
 const {
   mongooseToObject,
   mutipleMongooseToObject,
@@ -8,20 +9,29 @@ const Category = require("../models/Category");
 class GameController {
   //[GET] /games/:slug
   show(req, res, next) {
-    Game.findOne({ slug: req.params.slug })
-      .then((game) => {
+    Promise.all([
+      Game.findOne({ slug: req.params.slug }),
+      Game.find({}).sort({ createdAt: -1 }).limit(4),
+      Category.find({}),
+      User.findById(req.user._id),
+    ])
+      .then(([game, games, categorys, user]) => {
         res.render("game/show", {
           game: mongooseToObject(game),
+          games: mutipleMongooseToObject(games),
+          categorys: mutipleMongooseToObject(categorys),
+          user: mongooseToObject(user),
         });
       })
       .catch(next);
   }
   //[GET] /games/create
   create(req, res, next) {
-    Category.find({})
-      .then((category) => {
+    Promise.all([Category.find({}), User.findById(req.user._id)])
+      .then(([category, user]) => {
         res.render("game/create", {
           category: mutipleMongooseToObject(category),
+          user: mongooseToObject(user),
         });
       })
       .catch(next);
@@ -35,11 +45,16 @@ class GameController {
   }
   //[GET] /games/:id/edit
   edit(req, res, next) {
-    Promise.all([Game.findById(req.params.id), Category.find({})])
-      .then(([game, category]) =>
+    Promise.all([
+      Game.findById(req.params.id),
+      Category.find({}),
+      User.findById(req.user._id),
+    ])
+      .then(([game, category, user]) =>
         res.render("game/edit", {
           game: mongooseToObject(game),
           category: mutipleMongooseToObject(category),
+          user: mongooseToObject(user),
         })
       )
       .catch(next);

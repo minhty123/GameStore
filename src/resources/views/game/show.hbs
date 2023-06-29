@@ -1,20 +1,143 @@
-<div class="mt-4">
+{{!-- <form method="post" action="/cart/add/{{game._id}}">
+  <div class="mt-4">
     <div class="row">
-            <div class="col-sm-6 col-lg-4" >
-                <div class="card-item">
-                    <img class="card-img-top" src="{{game.Image}}" alt="{{game.name}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{game.name}}</h5>
-                        <p class="card-text">Nhà phát hành: {{game.Publisher}}</p>
-                        <p class="card-text">Ngày phát hành: {{game.Release_date}}</p>
-                        <p class="card-text">Thể loại: {{game.Type}}</p>
-                        <p class="card-text">Ngôn ngữ: {{game.Language}}</p>
-                        <p class="card-text">Dung lượng: {{game.Capacity}}</p>
-                        <p class="card-text">Cấu hình: {{game.Configuration}}</p>
-                        <p class="card-text">Dòng game: {{game.Development}}</p>
-                        <a href="{{game.Filedl}}" target="_blank" class="btn btn-primary">Download</a>
-                 </div>
-            </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card-item">
+          <img class="card-img-top" src="{{game.Image}}" alt="{{game.name}}" />
+          <div class="card-body">
+            <h5 class="card-title">{{game.name}}</h5>
+            <p class="card-text">Nhà phát hành: {{game.Publisher}}</p>
+            <p class="card-text">Ngày phát hành: {{game.Release_date}}</p>
+            <p class="card-text">Thể loại: {{game.Type}}</p>
+            <p class="card-text">Ngôn ngữ: {{game.Language}}</p>
+            <p class="card-text">Dung lượng: {{game.Capacity}}</p>
+            <p class="card-text">Cấu hình: {{game.Configuration}}</p>
+            <p class="card-text">Dòng game: {{game.Development}}</p>
+            <a
+              href="{{game.Filedl}}"
+              target="_blank"
+              class="btn btn-primary"
+            >Download</a>
+            <button type="submit">add</button>
+          </div>
         </div>
+      </div>
     </div>
+  </div></form> --}}
+
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb__links">
+          <a href="/"><i class="fa fa-home"></i> Home</a>
+          <a href="/category">Games</a>
+          <span>{{game.name}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<!-- Breadcrumb End -->
+
+<!-- Game Section Begin -->
+
+<section class="game-details spad">
+  <div class="container">
+
+    <div class="game__details__content">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="game__details__pic">
+            <img src="{{game.Image}}" />
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <form method="POST" action="/cart/games/{{game.slug}}">
+          <div class="game__details__text">
+            <div class="game__details__title">
+              <h1>{{game.name}}</h1>
+            </div>
+
+            <p>{{game.Content}}</p>
+            <div class="game__details__widget">
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <ul>
+                    <li><span>Nhà phát hành:</span>{{game.Publisher}}</li>
+                    <li><span>Ngày phát hành:</span> {{game.Release_date}}</li>
+                    <li><span>Dung lượng:</span> {{game.Capacity}}</li>
+                    <li><span>Ngôn ngữ:</span> {{game.Language}}</li>
+                  </ul>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <ul>
+                    <li><span>Thể loại:</span> {{#each game.Type}}<a class="types" href="/category/{{this}}"> {{this}},</a> {{/each}}</li>
+                    <li><span>Cấu hình:</span> {{game.Configuration}}</li>
+                    <li><span>Dòng game:</span> {{game.Development}}</li>
+                    <li><span>Cập nhật:</span> {{game.updatedAt}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="game__details__btn">
+              {{#if game.price}}
+                <button type="submit" class="buy-btn"><span>Buy Now</span>
+                  <i class="fa fa-arrow-right"></i></button>
+              {{else}}
+                <a
+                  href="{{game.Filedl}}"
+                  target="_blank"
+                  class="buy-btn"
+                ><span>Download Now</span>
+                  <i class="fa fa-angle-right"></i></a>
+              {{/if}}
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </form>
+    <div class="row">
+        <div class="col-lg-8 col-md-8">
+          <div class="product_detail">
+                <div class="section-title">
+                  <h4>Giới thiệu game {{game.name}}</h4>
+                </div>
+                <div class="product-content"><p>{{game.Content}}</p></div>
+                <div class="guide-install"></div>
+                <div class="comment"></div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <div class="trending__product">
+            <div class="row">
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="section-title">
+                  <h4 class="vertical-line">GAME MỚI</h4>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="btn__all">
+                  <a href="/category" class="primary-btn">Xem thêm
+                    <span></span></a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="new-game">
+                {{#each games}}
+                <div class="game-view">
+                  <a href="/games/{{this.slug}}"><img src="{{this.Image}}"></a>
+                  <h5><a href="/games/{{this.slug}}">{{this.name}}</a></h5>
+                </div>
+                {{/each}}
+              </div> 
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- Game Section End -->

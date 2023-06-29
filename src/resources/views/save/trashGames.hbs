@@ -1,81 +1,80 @@
-<form class="mt-4" name="container-form" method="POST" action="/games/handle-trash-actions">
-    <div>
-      <a href="/save/stored/games">My Game</a>
-      <h3>Deleted Game</h3>
-    </div>
-    <div class="mt-4 d-flex align-items-center">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="checkbox-all">
-        <label class="form-check-label" for="checkbox-all">
-          Select all
-        </label>
-      </div> 
-      <select class="form-control form-control-sm checkbox-select-all-options" name="action" required>
-        <option value="">-- Pick option --</option>
-        <option value="delete">Delete</option>
-        <option value="restore">Restore</option>
-      </select>
-      <button class="btn btn-primary btn-sm check-all-submit-btn mt-1 disabled">Perform</button>
-    </div>
-        <table class="table mt-2">
-            <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">No.</th>
-                    <th scope="col">Tên</th>
-                    <th scope="col">Thể loại</th>
-                    <th scope="col" colspan="2">Deleted at</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each game}}
-                <tr>
-                    <td>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="gameIds[]" value="{{this._id}}">
-                      </div> 
-                    </td>
-                    <th scope="row">{{sum @index 1}}</th>
-                    <td>{{this.name}}</td>
-                    <td>{{this.Type}}</td>
-                    <td>{{this.deletedAt}}</td>
-                    <td>
-                        <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Restore</a>
-                        <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}" data-target="#deleteGameModal">Delete</a>
-                    </td>
-                </tr>
-                {{else}}
-                <tr>
-                  <td colspan="5" class="text-center">
-                    Nothing here.
-                  </td>
-                </tr>
-                {{/each}}
-            </tbody>
-    </table>
-</form>
+<div class="game-delete">
+<div class="mt-4">
+  <a href="/save/stored/games">My Game</a>
+  <h3>Deleted Game</h3>
+</div>
 
-{{!-- confirm delete --}}
-<div id = "deleteGameModal" class="modal" tabindex="-1" role="dialog">
+<div class="mt-4 d-flex align-items-center">
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="checkbox-all">
+    <label class="form-check-label" for="checkbox-all">
+      Select all
+    </label>
+  </div>
+  <select class="form-select form-select-sm checkbox-select-all-options" name="action" required>
+    <option value="">-- Pick option --</option>
+    <option value="delete">Delete</option>
+    <option value="restore">Restore</option>
+  </select>
+  <button class="btn btn-primary btn-sm check-all-submit-btn disabled">Perform</button>
+</div>
+
+<table class="table mt-2">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">No.</th>
+      <th scope="col">Tên</th>
+      <th scope="col">Thể loại</th>
+      <th scope="col" colspan="2">Deleted at</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each game}}
+    <tr>
+      <td>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="gameIds[]" value="{{this._id}}">
+        </div>
+      </td>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{this.name}}</td>
+      <td>{{this.Type}}</td>
+      <td>{{this.deletedAt}}</td>
+      <td>
+        <a href="" class="btn btn-link btn-restore btn-de" data-id="{{this._id}}">Restore</a>
+        <a href="" class="btn btn-link btn-de" data-toggle="modal" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#deleteGameModal">Delete</a>
+      </td>
+    </tr>
+    {{else}}
+    <tr>
+      <td colspan="5" class="text-center">
+        Nothing here :(
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+
+<!-- Confirm delete -->
+<div id="deleteGameModal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Wait !</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title">Wait!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Are you sure ??? If not, click cancel please :></p>
+        <p>Are you sure? If not, click cancel please :></p>
       </div>
       <div class="modal-footer">
         <button id="btn-delete-game" type="button" class="btn btn-danger">Sure</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>
 </div>
-
 
 <form name="delete-game-form" method="POST"></form>
 <form name="restore-game-form" method="POST"></form>
@@ -131,7 +130,9 @@
           let checkedCount = $('input[name="gameIds[]"]:checked').length
           if(checkedCount){
             checkAllSubmitBtn.removeClass('disabled')
-          }else checkAllSubmitBtn.addClass('disabled')
+          }else{
+            checkAllSubmitBtn.addClass('disabled')
+           }
         }
     })
 </script>

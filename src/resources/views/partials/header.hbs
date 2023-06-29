@@ -1,93 +1,77 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Logo</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="offcanvas"
-      data-bs-target="#offcanvasNavbar"
-      aria-controls="offcanvasNavbar"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div
-      class="offcanvas offcanvas-end"
-      tabindex="-1"
-      id="offcanvasNavbar"
-      aria-labelledby="offcanvasNavbarLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">GameUp</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
+<!-- Header Section Begin -->
+<header class="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="header__logo">
+          <a href="/">
+            <img
+              src="https://res.cloudinary.com/dca4pmvud/image/upload/v1687773641/logo_jwcfid.png"
+              alt="logo"
+            />
+          </a>
+        </div>
       </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Trang chủ</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Games
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item">Online + Co-op</a></li>
-              <li><a class="dropdown-item">Hành Động</a></li>
-              <li><a class="dropdown-item">Kinh Dị</a></li>
-              <li><a class="dropdown-item">Phiêu Lưu</a></li>
-              <li><a class="dropdown-item">Thế giới mở</a></li>
-              <li><a class="dropdown-item">Anime</a></li>
-              <li><a class="dropdown-item">Thể thao</a></li>
-              <li><a class="dropdown-item">Nhập vai</a></li>
-              <li><a class="dropdown-item">Sinh tồn</a></li>
-              <li><a class="dropdown-item">Đối kháng</a></li>
-              <li><a class="dropdown-item">Chiến thuật</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              UserName
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/games/create">Add Game</a></li>
-              <li><a
-                  class="dropdown-item"
-                  href="/save/stored/games"
-                >Stored</a></li>
-              <li><a class="dropdown-item" href="#">Log out</a></li>
-
-              <li>
-                <hr class="dropdown-divider" />
+      <div class="col-lg-8">
+        <div class="header__nav">
+          <nav class="header__menu">
+            <ul>
+              <li class="active"><a href="/">Trang chủ</a></li>
+              <li><a href="/category">Games
+                  <span class="arrow_carrot-down"></span></a>
+                <ul class="dropdown">
+                  {{#each categorys}}
+                    <li><a href="/category/{{this.name}}">{{this.name}}</a></li>
+                  {{/each}}
+                </ul>
               </li>
+              <li><a href="/category/Việt hóa">Việt Hóa</a></li>
+              <li><a
+                  href="/category/Online + Co-op + Multiplayer"
+                >Online</a></li>
+              <li><a href="/category/Free">Miễn Phí</a></li>
             </ul>
-          </li>
-        </ul>
-        <form class="d-flex mt-3" role="search">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+          </nav>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="header__right">
+          {{#if user.IsAdmin}}
+            <span></span>
+          {{else}}
+            <div class="cart">
+              <a href="/cart/show"><i class="fa fa-bag-shopping"></i></a>
+            </div>
+          {{/if}}
+          <div class="drowdown">
+            <a
+              class="btn dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i
+                class="fa-solid fa-user"
+                style="color: aliceblue;"
+              >{{user.name}}</i>
+              {{!-- <span>{{user.name}}</span> --}}
+            </a>
+            <ul class="dropdown-menu">
+              {{#if user.IsAdmin}}
+                <li><a
+                    class="dropdown-item"
+                    href="/save/stored/games"
+                  >Stored</a></li>
+                <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
+              {{else}}
+                <li><a class="dropdown-item" href="/cart/show">Cart</a></li>
+                <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
+              {{/if}}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</nav>
+</header>

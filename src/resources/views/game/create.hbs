@@ -1,5 +1,5 @@
-<div class="mt-4">
-    <h3>Add Game</h3>
+<div class="mt-4 ">
+    <h3>Thêm Game Mới</h3>
     <form class="mt-4" method="post" action="/games/store">
         <div class="form-group">
             <label for="name">Tên Game</label>
@@ -10,46 +10,73 @@
             <input type="text" class="form-control" id="Publisher" name = "Publisher">
         </div>
         <div class="form-group">
-            <label for="Release_date">Ngày phát hành</label>
-            <input type="text" class="form-control" id="Release_date" name = "Release_date">
+            <div class="r_date">
+            <div class="u_date">
+                <label for="Release_date">Ngày phát hành</label>
+                <input type="date" class="form-control " id="Release_date" name = "Release_date">
+            </div>
+            <div class="u_price">
+            <label for="price">Giá</label>
+            <input type="number" class="form-control " id="price" name = "price">
+            </div>
+            </div>
         </div>
         <div class="form-group">
-            <label for="Type">Thể loại</label>
-            {{#each category}}
-            <input type="checkbox" name = "Type" value="{{this.name}}">   
-                <label>{{this.name}}</label>      
-            </input>
-            {{/each}}
+             <div class="cap">
+                <label for="Capacity">Dung lượng</label>
+                <input type="text" class="form-control" id="Capacity" name = "Capacity">
+             </div>
+            <div class="cap">
+                <label for="Configuration">Cấu hình</label>
+                <input type="text" class="form-control" id="Configuration" name = "Configuration">
+            </div>
+            <div class="cap">
+                <label for="Development">Dòng game</label>
+                <select id="Development" name = "Development">      
+                    <option>Indie</option>
+                    <option>Bom Tấn (AAA) </option>
+                </select>
+             </div>
+        </div>
+        <div class="form-group">
+            <label for="Content">Nội dung</label>
+            <textarea class="form-control" id="Content" name = "Content"></textarea>
+        </div>
+        <div class="form-group">
+            <div class="cate">
+                <div class="type">
+                    <label for="Type">Thể loại:</label>
+                        {{#each category}}
+                        <input type="checkbox" name = "Type" value="{{this.name}}">   
+                            <label>{{this.name}}</label>      
+                        </input>
+                        {{/each}}
+                </div>
+                <div class="lang">
+                    <label for="Language">Ngôn ngữ:</label>
+                    <input type="checkbox" name = "Language" value="Tiếng Anh">   
+                        <label>Tiếng Anh</label>      
+                    </input>      
+                    <input type="checkbox" name = "Language" value="Tiếng Việt">   
+                        <label>Tiếng Việt</label>      
+                    </input>   
+                    <input type="checkbox" name = "Language" value="Tiếng Trung">   
+                        <label>Tiếng Trung</label>      
+                    </input>     
+                    <input type="checkbox" name = "Language" value="Tiếng Nhật">   
+                        <label>Tiếng Nhật</label>      
+                    </input>   
+                    <input type="checkbox" name = "Language" value="Tiếng Pháp">   
+                        <label>Tiếng Pháp</label>      
+                    </input>   
+                </div>
+            </div>
+            
         </div>
 
-        <div class="form-group">
-            <label for="Language">Ngôn ngữ</label>
-            <input type="checkbox" name = "Language" value="Tiếng Anh">   
-                <label>Tiếng Anh</label>      
-            </input>      
-            <input type="checkbox" name = "Language" value="Tiếng Việt">   
-                <label>Tiếng Việt</label>      
-            </input>   
-            <input type="checkbox" name = "Language" value="Tiếng Trung">   
-                <label>Tiếng Trung</label>      
-            </input>     
-        </div>
         
         <div class="form-group">
-            <label for="Capacity">Dung lượng</label>
-            <input type="text" class="form-control" id="Capacity" name = "Capacity">
-        </div>
-        <div class="form-group">
-            <label for="Configuration">Cấu hình</label>
-            <input type="text" class="form-control" id="Configuration" name = "Configuration">
-        </div>
-        
-        <div class="form-group">
-            <label for="Development">Dòng game</label>
-            <select id="Development" name = "Development">      
-                <option>Indie</option>
-                <option>Bom Tấn (AAA) </option>
-            </select>
+            
         </div>
         <div class="form-group">
             <label for="Filedl">Link Download</label>
@@ -59,6 +86,71 @@
             <label for="Image">Image</label>
             <input type="text" class="form-control" id="Image" name = "Image">
         </div>
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary btn-them">Thêm</button>
     </form>
 </div>
+
+{{!-- <div class="mt-4">
+    <h3>Add Game</h3>
+    <form class="mt-4" method="post" action="/games/store">
+        <div class="form-group">
+            <label for="name">Tên Game</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="Publisher">Nhà phát hành</label>
+            <input type="text" class="form-control" id="Publisher" name="Publisher">
+        </div>
+        <div class="form-group">
+            <label for="Release_date">Ngày phát hành</label>
+            <input type="text" class="form-control" id="Release_date" name="Release_date">
+        </div>
+        <div class="form-group">
+            <label for="Type">Thể loại</label>
+            {{#each category}}
+            <input type="checkbox" name="Type" value="{{this.name}}">
+                <label>{{this.name}}</label>
+            </input>
+            {{/each}}
+        </div>
+
+        <div class="form-group">
+            <label for="Language">Ngôn ngữ</label>
+            <input type="checkbox" name="Language" value="Tiếng Anh">
+                <label>Tiếng Anh</label>
+            </input>
+            <input type="checkbox" name="Language" value="Tiếng Việt">
+                <label>Tiếng Việt</label>
+            </input>
+            <input type="checkbox" name="Language" value="Tiếng Trung">
+                <label>Tiếng Trung</label>
+            </input>
+        </div>
+
+        <div class="form-group">
+            <label for="Capacity">Dung lượng</label>
+            <input type="text" class="form-control" id="Capacity" name="Capacity">
+        </div>
+        <div class="form-group">
+            <label for="Configuration">Cấu hình</label>
+            <input type="text" class="form-control" id="Configuration" name="Configuration">
+        </div>
+
+        <div class="form-group">
+            <label for="Development">Dòng game</label>
+            <select id="Development" name="Development">
+                <option>Indie</option>
+                <option>Bom Tấn (AAA)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Filedl">Link Download</label>
+            <input type="text" class="form-control" id="Filedl" name="Filedl">
+        </div>
+        <div class="form-group">
+            <label for="Image">Image</label>
+            <input type="text" class="form-control" id="Image" name="Image">
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div> --}}

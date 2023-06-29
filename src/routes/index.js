@@ -1,17 +1,15 @@
 const siteRouter = require("./site");
 const gameRouter = require("./games");
 const saveRouter = require("./save");
-// const auth= require('./auth')
+const authRouter = require("./auth");
+const cartRouter = require("./cart");
 
 route = (app) => {
   app.use("/games", gameRouter);
   app.use("/save", saveRouter);
-  // app.use('/auth', auth)
+  app.use("/auth", authRouter);
+  app.use("/cart", cartRouter);
   app.use("/", siteRouter);
-  // app.post('/search', (req, res) => {
-  //     console.log(req.body)
-  //     res.send('')
-  //   })
 };
 
 module.exports = route;

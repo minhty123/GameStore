@@ -1,0 +1,34 @@
+form{
+    
+    h3{
+        color: #ffffff;
+        font-size: 50px;
+    }
+    .form-check{
+        label{
+            font-size: 14px;
+        }
+    }
+    table{
+        background-color: #ffffff;
+        tbody{
+            tr{
+                td{
+                    a.btn{
+                        text-decoration: none;
+                        &:hover{
+                            color:indianred;
+                        }
+                    }
+                   
+                }
+            }
+        }
+    }
+    .add-game{
+        float: right;
+        color: aquamarine;
+        font-size: 25px;
+    }
+  
+}

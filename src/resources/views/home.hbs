@@ -1,87 +1,189 @@
+<!-- Page Preloder -->
+{{! <div id="preloder">
+  <div class="loader"></div>
+</div> }}
+
 <div class="mt-4">
-  <div id="carouselExampleDark" class="carousel carousel-dark slide">
-    <div class="carousel-indicators">
+  <section class="banner">
+    <div id="carouselExampleDark" class="carousel carousel-dark slide">
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner banner_slide">
+        <div class="carousel-item active">
+          <img
+            src="https://res.cloudinary.com/dca4pmvud/image/upload/v1677080019/the-death-than-trung-slideshow-RVwhtSjpTjI5G3MFwYdL_bkzyjk.jpg"
+          />
+          <div class="carousel-caption d-none d-md-block banner_text">
+            <div class="label"><a href="/category/Kinh dị">Kinh dị</a></div>
+            <div class="label"><a href="/category/Việt hóa">Việt hóa</a></div>
+            <div class="label"><a href="/category/Phiêu lưu">Phiêu lưu</a></div>
+            <h2>The Death | Thần Trùng</h2>
+            <a href="/games/the-death-or-than-trung"><span>DownLoad Now</span>
+              <i class="fa fa-angle-right"></i></a>
+          </div>
+        </div>
+        {{#each gamebn}}
+          <div class="carousel-item">
+            <img src="{{this.Image}}" />
+            <div class="carousel-caption d-none d-md-block banner_text">
+              {{#each this.Type}}
+                <div class="label"><a
+                    href="/category/{{this}}"
+                  >{{this}}</a></div>
+              {{/each}}
+              <h2>{{this.name}}</h2>
+              <a href="/games/{{this.slug}}"><span>DownLoad Now</span>
+                <i class="fa fa-angle-right"></i></a>
+            </div>
+          </div>
+        {{/each}}
+      </div>
       <button
+        class="carousel-control-prev"
         type="button"
         data-bs-target="#carouselExampleDark"
-        data-bs-slide-to="0"
-        class="active"
-        aria-current="true"
-        aria-label="Slide 1"
-      ></button>
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
       <button
+        class="carousel-control-next"
         type="button"
         data-bs-target="#carouselExampleDark"
-        data-bs-slide-to="1"
-        aria-label="Slide 2"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#carouselExampleDark"
-        data-bs-slide-to="2"
-        aria-label="Slide 3"
-      ></button>
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="10000">
-        <img
-          src="https://res.cloudinary.com/dca4pmvud/image/upload/v1677080019/the-death-than-trung-slideshow-RVwhtSjpTjI5G3MFwYdL_bkzyjk.jpg"
-        />
-        <div class="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img
-          src="https://res.cloudinary.com/dca4pmvud/image/upload/v1677080024/marvels-spider-man-remastered-slideshow-VYQJx155z9ZxipgypDbl_vh8yvq.jpg"
-        />
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img
-          src="https://res.cloudinary.com/dca4pmvud/image/upload/v1677080043/elden-ring-v106-viet-hoa-online-multiplayer-slideshow-mOqHx8PaarKQ5pLXZ0aK_kkq74l.jpg"
-        />
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
-        </div>
-      </div>
-    </div>
-    <button
-      class="carousel-control-prev"
-      type="button"
-      data-bs-target="#carouselExampleDark"
-      data-bs-slide="prev"
-    >
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button
-      class="carousel-control-next"
-      type="button"
-      data-bs-target="#carouselExampleDark"
-      data-bs-slide="next"
-    >
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-  <div class="row">
-    {{#each game}}
-      <div class="col-sm-6 col-lg-4">
-        <div class="card-item">
-          <img class="card-img-top" src="{{this.Image}}" alt="{{this.name}}" />
-          <div class="card-body">
-            <h5 class="card-title">{{this.name}}</h5>
-            <p class="card-text">Thể loại: {{this.Type}}</p>
-            <a href="/games/{{this.slug}}" class="btn btn-primary">Chi Tiết</a>
+  </section>
+  <!-- Product Section Begin -->
+  <section class="product spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="trending__product">
+            <div class="row">
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="section-title">
+                  <h4 class="vertical-line">GAME MỚI</h4>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="btn__all">
+                  <a href="/category" class="primary-btn">View All
+                    <span><i class="fa-solid fa-arrow-right"></i></span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            {{#each game}}
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="product__item">
+                  <div class="product__item__pic">
+                    <a href="/games/{{this.slug}}"><img
+                        class="card-img-top"
+                        src="{{this.Image}}"
+                        alt="{{this.name}}"
+                      /></a>
+                  </div>
+                  <div class="product__item__text">
+                    <ul>
+                      {{#each this.Type}}
+                        <li><a href="/category/{{this}}">{{this}}</a></li>
+                      {{/each}}
+                    </ul>
+                    <h5><a href="/games/{{this.slug}}">{{this.name}}</a></h5>
+                    {{#if this.price}}
+                      <a
+                        href="/games/{{this.slug}}"
+                        class="btn btn-buy"
+                      >{{this.price}} VNĐ</a>
+                    {{else}}
+                      <a
+                        href="/games/{{this.slug}}"
+                        class="btn btn-buy"
+                      >Free</a>
+                    {{/if}}
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+          <div class="trending__product">
+            <div class="row">
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="section-title">
+                  <h4 class="vertical-line">GAME VIỆT HÓA</h4>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="btn__all">
+                  <a href="/category/Việt hóa" class="primary-btn">View All
+                    <span><i class="fa-solid fa-arrow-right"></i></span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            {{#each gamevh}}
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="product__item">
+                  <div class="product__item__pic">
+                    <img
+                      class="card-img-top"
+                      src="{{this.Image}}"
+                      alt="{{this.name}}"
+                    />
+                  </div>
+                  <div class="product__item__text">
+                    <ul>
+                      {{#each this.Type}}
+                        <li><a href="/category/{{this}}">{{this}}</a></li>
+                      {{/each}}
+                    </ul>
+                    <h5><a href="/games/{{this.slug}}">{{this.name}}</a></h5>
+                    {{#if this.price}}
+                      <a
+                        href="/games/{{this.slug}}"
+                        class="btn btn-buy"
+                      >{{this.price}} VNĐ</a>
+                    {{else}}
+                      <a
+                        href="/games/{{this.slug}}"
+                        class="btn btn-buy"
+                      >Free</a>
+                    {{/if}}
+                  </div>
+                </div>
+              </div>
+            {{/each}}
           </div>
         </div>
       </div>
-    {{/each}}
-  </div>
+    </div>
+  </section>
+  <!-- Product Section End -->
 </div>

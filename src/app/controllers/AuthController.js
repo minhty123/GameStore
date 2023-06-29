@@ -1,49 +1,87 @@
-const jsw = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
-const User = require('../models/User')
+const jwt = require("jsonwebtoken");
+const Category = require("../models/Category");
+const bcrypt = require("bcryptjs");
+const User = require("../models/User");
+const cookieParser = require("cookie-parser");
+const { category } = require("./SiteController");
+const { mutipleMongooseToObject } = require("../../util/mongoose");
+const salt = 10;
+class AuthController {
+  //[POST] /auth/register
+  async register(req, res, next) {
+    const { name, email, password, confirmPassword } = await req.body;
 
-const { registerValidator } = require('../../util/auth')
+    if (password !== confirmPassword) {
+      return res.status(400).json("Mật khẩu và mật khẩu xác nhận không khớp");
+    }
+    // const name = await req.body.name;
+    const hashpassword = await bcrypt.hash(req.body.password, salt);
 
-class AuthController{
-    //[POST] /auth/register
-    async register(req, res, next){
-        const { error } = registerValidator(req.body);
-
-        if (error) return res.status(422).send(error.details[0].message);
-
-        const checkEmailExist = await User.findOne({ email: req.body.email });
-
-        if (checkEmailExist) return res.status(422).send('Email is exist');
-
-        const salt = await bcrypt.genSalt(10);
-        const hashPassword = await bcrypt.hash(req.body.password, salt);
-
-        const user = new User({
-            name: req.body.name,
-            email: req.body.email,
-            role: 'User',
-            password: hashPassword,
-        });
-
-        try {
-            const newUser = await user.save();
-            await res.send(newUser);
-        } catch (err) {
-            res.status(400).send(err);
+    await User.findOne({
+      email: email,
+    })
+      .then((data) => {
+        if (data) {
+          res.json("Email đã tồn tại!");
+        } else {
+          return User.create({
+            name: name,
+            email: email,
+            password: hashpassword,
+          });
         }
-    }
-    //[POST] /auth/login
-    async login(req, res, next){
-        const user = await User.findOne({email: req.body.email});
-        if (!user) return res.status(422).send('Email or Password is not correct');
+      })
+      .then((data) => {
+        // res.send("Tạo thành công");
+        res.redirect("/");
+      })
+      .catch((err) => {
+        res.status(500).json("Đăng ký Thất bại");
+      });
+  }
+  //[POST] /auth/login
+  async login(req, res, next) {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) return res.status(422).send("Email or Password is not correct");
 
-        const checkPassword = await bcrypt.compare(req.body.password, user.password);
+    const checkPassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
 
-        if (!checkPassword) return res.status(422).send('Email or Password is not correct');
-        
-        const token = jsw.sign({_id: user._id, role: user.role}, '${process.env.ACCESS_TOKEN_SECRET}', { expiresIn: '5m' });
+    if (!checkPassword)
+      return res.status(422).send("Email or Password is not correct");
 
-        res.header('auth-token', token).send(token); 
-    }
+    const token = jwt.sign(
+      { _id: user._id, IsAdmin: user.IsAdmin },
+      "${process.env.ACCESS_TOKEN_SECRET}",
+      { expiresIn: "30m" }
+    );
+    res.cookie("auth-token", token);
+    res.redirect("/");
+  }
+  //GET auth/login
+  async signin(req, res, next) {
+    Category.find({}).then((categorys) => {
+      res.render("auth/login", {
+        categorys: mutipleMongooseToObject(categorys),
+      });
+    });
+  }
+
+  //GET auth/register
+  async signup(req, res, next) {
+    Category.find({}).then((categorys) => {
+      res.render("auth/register", {
+        categorys: mutipleMongooseToObject(categorys),
+      });
+    });
+  }
+  //GET
+  async logout(req, res, next) {
+    res.clearCookie("auth-token");
+    res.render("auth/login");
+  }
 }
-module.exports = new AuthController
+
+module.exports = new AuthController();

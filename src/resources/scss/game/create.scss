@@ -1,3 +1,71 @@
-h3{
-    color:aqua
-}
+.mt-4 {
+    margin-top: 1rem;
+    h3{
+      color: #ffffff;
+    }
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+    .r_date{
+      display: flex;
+      width: 50%;
+      .u_date{
+        width: 25%;
+        margin-right: 115px;
+      }
+      .u_price{
+        width: 25%;
+      }
+    }
+    .cap{
+      display: inline-block;
+      margin-right: 50px;
+      label{
+        display: block;
+      }
+      select{
+        width: 100%;
+      }
+      input{
+        width: 100%;
+        
+      }
+    }
+    .cate{
+      display: flex;
+      .type{
+        width: 50%;
+        border-right: 1px solid #ffffff;
+        padding-right: 5px;
+        input{
+          label{
+            margin-right:10px ;
+          }
+          
+        }
+      }
+      .lang{
+        margin-left: 5px;
+        display: inline-block;
+        width: 50%;
+      }
+    }
+    
+  }
+  button.btn-them{
+    background-color:rgba(72, 237, 77, 0.593);
+  }
+  label {
+   color: aliceblue;
+    margin-bottom: 0.5rem;
+    font-weight:bold;
+  }

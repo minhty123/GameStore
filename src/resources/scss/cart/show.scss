@@ -1,0 +1,57 @@
+.title-ca{
+    color: #ffffff;
+    font-size: 20px;
+    margin-top: 30px;
+}
+.panel-body{
+    padding: 15px;
+    background-color: #ffffff;
+    color: black;
+    margin-top: 10px;
+    .table-responsive{
+        table{
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+            thead{
+                vertical-align: bottom;
+                 border-bottom: 2px solid #ddd;
+                 tr{
+                    th{
+                        font-weight: 700;
+                        font-size: 24px;
+                        color: rgb(39, 214, 26);
+                    }
+                 }
+            }
+            tbody{
+                display: table-row-group;
+                vertical-align: middle;
+                border-color: inherit;
+                tr{
+                    td{
+                        padding: 8px;
+                        line-height: 1.42857143;
+                        vertical-align: top;
+                        border-top: 1px solid #ddd;
+                        .img-cart{
+                            display: block;
+                            max-width: 150px;
+                            height: auto;
+                            margin-left: auto;
+                            margin-right: auto;
+                        }
+                        label{
+                            color: black;
+                        }
+                        .form-inline{
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    
+}

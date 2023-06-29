@@ -1,24 +1,186 @@
 @import "./game/create.scss";
+@import "./game/show.scss";
 @import "./partials/header.scss";
 @import "./partials/footer.scss";
+@import "./save/storedGames.scss";
+@import "./save/trashGames.scss";
+@import "./home.scss";
+@import "./game/edit.scss";
+@import "./category.scss";
+@import "./auth/login.scss";
+@import "./auth/register.scss";
+@import "./cart/show.scss";
+// .container {
+//     max-width: 1320px;
+//     margin: 0 auto;
+//     padding: 0rem 0.5rem; }
+  
+//   * {
+//     margin: 0;
+//     padding: 0;
+//     box-sizing: border-box; }
+  
+//   html {
+//     font-size: 62.5%;
+//     font-family: 'Quicksand', sans-serif; }
+  
+//   body {
+//     font-size: 1.6rem; }
+//     body img {
+//       width: 100%;
+//       height: auto; }
 
+$primary-color: #ee8425;
+$secondary-color: #f9488b;
+$secondary-color-2: #f44949;
+$white-color: #ffffff;
+$heading-color: #171822;
+$heading-color2: #272727;
+$para-color: #6a6b7c;
 
-.container {
-    max-width: 1320px;
-    margin: 0 auto;
-    padding: 0rem 0.5rem; }
-  
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; }
-  
-  html {
-    font-size: 62.5%;
-    font-family: 'Quicksand', sans-serif; }
-  
-  body {
-    font-size: 1.6rem; }
-    body img {
-      width: 100%;
-      height: auto; }
+/*----------------------------------------*/
+/* Template default CSS
+/*----------------------------------------*/
+html,
+body {
+  height: 100%;
+  font-family: 'Work Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  background-color: #0b0c2a;
+}
+
+h1,
+h2,
+h3,
+h5,
+h6 {
+  margin: 0;
+  color: #111111;
+  font-weight: 400;
+  font-family: 'Work Sans', sans-serif;
+}
+
+h1 {
+  font-size: 70px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h4 {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+p {
+  font-size: 16px;
+  font-family: 'Work Sans', sans-serif;
+  color: #6a6b7c;
+  font-weight: 400;
+  line-height: 28px;
+  margin: 0 0 15px 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+input:focus,
+select:focus,
+button:focus,
+textarea:focus {
+  outline: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+}
+
+//breacum
+/*---------------------
+  Breadcrumb
+-----------------------*/
+.breadcrumb-option {
+  padding-top: 35px;
+}
+
+.breadcrumb__links {
+
+  a {
+      font-size: 15px;
+      color: $white-color;
+      margin-right: 18px;
+      display: inline-block;
+      position: relative;
+
+      i {
+          margin-right: 5px;
+          color: #f44949;
+      }
+
+      &:after {
+          position: absolute;
+          right: -14px;
+          top: 0;
+          content: '\f105';
+          font-family: "FontAwesome";
+      }
+  }
+
+  span {
+      font-size: 15px;
+      color: #b7b7b7;
+      display: inline-block;
+  }
+}
+
+/*---------------------
+  Normal Breadcrumb
+-----------------------*/
+.normal-breadcrumb {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.normal__breadcrumb__text {
+
+  h2 {
+      color: $white-color;
+      font-size: 48px;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      margin-bottom: 22px;
+  }
+
+  p {
+      color: $white-color;
+      font-size: 24px;
+      margin-bottom: 0;
+  }
+}

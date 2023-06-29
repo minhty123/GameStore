@@ -1,34 +1,56 @@
 const Cart = require("../models/Cart");
+const Game = require("../models/Game");
+const User = require("../models/User");
 const {
   mongooseToObject,
   mutipleMongooseToObject,
 } = require("../../util/mongoose");
+
 class CartController {
-  add(req, res, next) {
+  //GET
+  show(req, res, next) {
+    Cart.findById(req.user._id)
+      .then((cart) => {
+        res.render("cart/show", {
+          cart: mongooseToObject(cart),
+        });
+      })
+      .catch(next);
+  }
+
+  //POST cart/:_id
+  AddToCart(req, res, next) {
     Promise.all([
-      Cart.findOne({ _id: req.users.id }),
-      Game.findOne({ _id: req.param.id }),
+      Cart.findOne({ _id: req.user._id }),
+      Game.findOne({ slug: req.params.slug }),
     ])
       .then(([cart, game]) => {
         const newItem = {
           id: game._id,
           name: game.name,
           price: game.price,
+          image: game.Image,
         };
         if (cart) {
           cart.items.push(newItem);
-          total += newItem.price;
+          cart.total += newItem.price;
+          return cart.save();
         } else {
-          const newCart = {
-            _id: req.users.id,
+          const newCart = new Cart({
+            _id: req.user._id,
             items: new Array(),
             total: newItem.price,
-          };
+          });
           newCart.items.push(newItem);
-          cart = newCart;
+
+          // cart = newCart;
+          newCart.save();
         }
-        cart.save();
+        // cart.save();
       })
+
       .catch(next);
   }
 }
+
+module.exports = new CartController();

@@ -1,0 +1,34 @@
+.signup{
+    margin-bottom: 100px;
+    .login__form{
+        h5{
+            font-size: 15px;
+            color: #ffffff;
+            margin-top: 20px;
+          a{
+            color: #f03030;
+            &:hover{
+                color:#ffde36ec;
+              }
+          }
+        }
+    }
+    .login__social__links{
+        text-align: left;
+        padding-left: 40px;
+        h3{
+            color: #ffffff;
+            font-weight: 700;
+            font-family: "Oswald", sans-serif;
+            margin-bottom: 30px;
+        }
+        ul{
+            li{
+                a{
+                    margin: 0;
+                     text-align: center;  
+                }
+            }
+        }
+    }
+}

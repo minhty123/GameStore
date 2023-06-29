@@ -1,0 +1,50 @@
+<div class="title-ca">Thông tin Giỏ Hàng</div>  
+<div class="panel-body">
+  
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Tên Game</th>
+          <th>Đơn giá</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            {{#each cart.items}}
+            <td>
+                <img
+                src="{{this.image}}"
+                class="img-cart"
+              />
+              </td>
+            <td><strong>{{this.name}}</strong></td>
+            <td>
+              <div class="form-inline">
+                <label>{{this.price}} VNĐ</label>
+
+              </div>
+            </td>
+            <td><a href="#" class="btn btn-primary"><i
+                  class="fa-solid fa-trash"
+                ></i></a></td>
+          </tr>
+          {{/each}}
+          <tr>
+            <td colspan="6">&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="text-right"><strong>Tổng tiền</strong></td>
+            <td>{{cart.total}} VNĐ</td>
+          </tr>
+          <tr>
+            <td colspan="4"></td>
+            <td><button type="submit" style="background-color: aquamarine;">Mua hàng</button></td>
+          </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>

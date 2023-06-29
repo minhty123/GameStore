@@ -1,0 +1,35 @@
+.game-delete{
+    margin-bottom: 350px;
+    a{
+        font-size: 35px;
+        color: red;
+    }
+    h3{
+        color: #ffffff;
+        font-size: 30px;
+    }
+    .form-check{
+        label{
+            font-size: 14px;
+        }
+    }
+    table{
+        background-color: #ffffff;
+        tbody{
+            tr{
+                td{
+                    a.btn-de{
+                        text-decoration: none;
+                        font-size: 16px;
+                        color:rgb(17, 92, 122);
+                        &:hover{
+                            color:indianred;
+                        }
+                    }
+                   
+                }
+            }
+        }
+    }
+  
+}

@@ -11,36 +11,17 @@
         </div>
         <div class="form-group">
             <div class="r_date">
+            <div class="u_date">
                 <label for="Release_date">Ngày phát hành</label>
                 <input type="date" class="form-control" value="{{game.Release_date}}" id="Release_date" name = "Release_date">
             </div>
-        </div>
-        <div class="form-group">
-            <label for="Type">Thể Loại:</label>      
-            <label>{{game.Type}}</label>
-            <div>
-            {{#each category}}
-            <input type="checkbox" name = "Type" value="{{this.name}}">   
-                <label>{{this.name}}</label>      
-            </input>
-            {{/each}}
+            <div class="u_price">
+                <label for="price">Giá</label>
+                <input type="number" class="form-control" value="{{game.price}}" id="price" name = "price">
+            </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="Language">Ngôn ngữ:</label>
-            <label>{{game.Language}}</label> 
-            <div>
-            <input type="checkbox" name = "Language" value="Tiếng Anh">   
-                <label>Tiếng Anh</label>      
-            </input>      
-            <input type="checkbox" name = "Language" value="Tiếng Việt">   
-                <label>Tiếng Việt</label>      
-            </input>   
-            <input type="checkbox" name = "Language" value="Tiếng Trung">   
-                <label>Tiếng Trung</label>      
-            </input>     
-            </div>
-        </div>
+
         <div class="form-group">
              <div class="cap">
                 <label for="Capacity">Dung lượng</label>
@@ -63,15 +44,43 @@
             <label for="Content">Nội dung</label>
             <textarea class="form-control" id="Content" name = "Content">{{game.Content}}</textarea>
         </div>
-        <div class="form-group">
-            <label for="price">Giá</label>
-            <input type="number" class="form-control" value="{{game.price}}" id="price" name = "price">
+        <div class="form-group" >
+            <div class="cate" style="margin-bottom:10px;">
+                <div class="type">
+                    <label for="Type">Thể loại:</label>
+                    <label style="margin-right:400px;">{{game.Type}}</label>
+                        {{#each category}}
+                        <input type="checkbox" name = "Type" value="{{this.name}}">   
+                            <label>{{this.name}}</label>      
+                        </input>
+                        {{/each}}
+                </div>
+                <div class="lang">
+                    <label for="Language">Ngôn ngữ:</label>
+                    <label>{{game.Language}}</label> 
+                    <div>
+                    <input type="checkbox" name = "Language" value="Tiếng Anh">   
+                        <label>Tiếng Anh</label>      
+                    </input>      
+                    <input type="checkbox" name = "Language" value="Tiếng Việt">   
+                        <label>Tiếng Việt</label>      
+                    </input>   
+                    <input type="checkbox" name = "Language" value="Tiếng Trung">   
+                        <label>Tiếng Trung</label>      
+                    </input>     
+                    <input type="checkbox" name = "Language" value="Tiếng Nhật">   
+                        <label>Tiếng Nhật</label>      
+                    </input>   
+                    <input type="checkbox" name = "Language" value="Tiếng Pháp">   
+                        <label>Tiếng Pháp</label>      
+                    </input>   
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label for="Filedl">Link Download</label>
             <input type="text" class="form-control" value="{{game.Filedl}}" id="Filedl" name = "Filedl">
         </div>  
-
         <div class="form-group">
             <label for="Image">Image</label>
             <textarea class="form-control" id="Image" name = "Image">{{game.Image}}</textarea>

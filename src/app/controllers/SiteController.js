@@ -1,5 +1,6 @@
 const Game = require("../models/Game");
 const User = require("../models/User");
+const Cart = require("../models/Cart");
 const {
   mongooseToObject,
   mutipleMongooseToObject,
@@ -15,14 +16,16 @@ class SiteController {
       Game.find({ Type: "Việt hóa" }).sort({ createdAt: -1 }).limit(8),
       Game.find({}).sort({ createdAt: -1 }).limit(2),
       User.findById(req.user._id),
+      Cart.findById(req.user._id),
     ])
-      .then(([game, categorys, gamevh, gamebn, user]) => {
+      .then(([game, categorys, gamevh, gamebn, user, cart]) => {
         res.render("home", {
           game: mutipleMongooseToObject(game),
           categorys: mutipleMongooseToObject(categorys),
           gamevh: mutipleMongooseToObject(gamevh),
           gamebn: mutipleMongooseToObject(gamebn),
           user: mongooseToObject(user),
+          cart: cart === null ? 0 : cart.items.length,
         });
       })
       .catch(next);
@@ -40,12 +43,14 @@ class SiteController {
       gameSearchPromise,
       Category.find({}),
       User.findById(req.user._id),
+      Cart.findById(req.user._id),
     ])
-      .then(([game, categorys, user]) => {
+      .then(([game, categorys, user, cart]) => {
         res.render("category", {
           game: mutipleMongooseToObject(game),
           categorys: mutipleMongooseToObject(categorys),
           user: mongooseToObject(user),
+          cart: cart === null ? 0 : cart.items.length,
         });
       })
       .catch(next);
@@ -61,13 +66,15 @@ class SiteController {
             Category.find({}),
             Category.findOne({ name: categoryType }),
             User.findById(req.user._id),
+            Cart.findById(req.user._id),
           ])
-            .then(([game, categorys, category, user]) => {
+            .then(([game, categorys, category, user, cart]) => {
               res.render("category", {
                 game: mutipleMongooseToObject(game),
                 categorys: mutipleMongooseToObject(categorys),
                 category: mongooseToObject(category),
                 user: mongooseToObject(user),
+                cart: cart === null ? 0 : cart.items.length,
               });
             })
             .catch(next);

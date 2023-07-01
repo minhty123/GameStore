@@ -103,13 +103,16 @@ $para-color: #6a6b7c;
         text-align: right;
          padding: 15px 0 10px;
          display: flex;
+         
          .cart{
             width: 25px;
-            margin-right: 15px;
+            
             a{
                 
                 i{
-                    
+                    padding-top: 5px;
+                    padding-right: 2px;
+                    font-size: 22px;
                     color: #b7b7b7;
                 }
                 :hover{

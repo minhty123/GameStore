@@ -14,5 +14,6 @@ router.get(
 );
 
 router.post("/games/:slug", verifyToken, cartController.AddToCart);
+router.delete("/show/:id", verifyToken, cartController.delete);
 
 module.exports = router;

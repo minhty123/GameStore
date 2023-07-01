@@ -1,6 +1,7 @@
 const Cart = require("../models/Cart");
 const Game = require("../models/Game");
 const User = require("../models/User");
+const Category = require("../models/Category");
 const {
   mongooseToObject,
   mutipleMongooseToObject,
@@ -9,10 +10,17 @@ const {
 class CartController {
   //GET
   show(req, res, next) {
-    Cart.findById(req.user._id)
-      .then((cart) => {
+    Promise.all([
+      Cart.findById(req.user._id),
+      Category.find({}),
+      User.findById(req.user._id),
+    ])
+      .then(([carts, categorys, user]) => {
         res.render("cart/show", {
-          cart: mongooseToObject(cart),
+          carts: mongooseToObject(carts),
+          categorys: mutipleMongooseToObject(categorys),
+          user: mongooseToObject(user),
+          cart: carts === null ? 0 : carts.items.length,
         });
       })
       .catch(next);
@@ -30,11 +38,13 @@ class CartController {
           name: game.name,
           price: game.price,
           image: game.Image,
+          link: game.Filedl,
         };
         if (cart) {
           cart.items.push(newItem);
           cart.total += newItem.price;
-          return cart.save();
+          cart.save();
+          res.redirect("/cart/show");
         } else {
           const newCart = new Cart({
             _id: req.user._id,
@@ -45,11 +55,41 @@ class CartController {
 
           // cart = newCart;
           newCart.save();
+          res.redirect("/cart/show");
         }
         // cart.save();
       })
 
       .catch(next);
+  }
+  async delete(req, res, next) {
+    try {
+      const cartId = req.user._id;
+      const itemId = req.params.id;
+      const cart = await Cart.findOne({ _id: cartId });
+
+      if (!cart) {
+        return res.status(404).json({ message: "Giỏ hàng không tồn tại" });
+      }
+      const itemIndex = cart.items.findIndex(
+        (item) => item.id.toString() === itemId.toString()
+      );
+
+      if (itemIndex === -1) {
+        return res
+          .status(404)
+          .json({ message: "Sản phẩm không tồn tại trong giỏ hàng" });
+      }
+
+      const deletedItem = cart.items.splice(itemIndex, 1);
+      cart.total -= parseInt(deletedItem[0].price, 10);
+
+      await cart.save();
+
+      res.redirect("/cart/show");
+    } catch (error) {
+      next(error);
+    }
   }
 }
 

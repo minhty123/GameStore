@@ -13,7 +13,8 @@
       </thead>
       <tbody>
           <tr>
-            {{#each cart.items}}
+            {{#each carts.items}}
+            
             <td>
                 <img
                 src="{{this.image}}"
@@ -27,9 +28,17 @@
 
               </div>
             </td>
-            <td><a href="#" class="btn btn-primary"><i
-                  class="fa-solid fa-trash"
-                ></i></a></td>
+            <td><button
+                type="button"
+                class="close btn btn-danger btn-sm delete-item"
+                data-dismiss="alert"
+                aria-label="Close"
+                data-item-id="{{this.id}}">
+               <span aria-hidden="true">
+                  <i class="fa fa-close"></i>
+                    </span>
+              </button>
+              </td>
           </tr>
           {{/each}}
           <tr>
@@ -37,14 +46,51 @@
           </tr>
           <tr>
             <td colspan="4" class="text-right"><strong>Tổng tiền</strong></td>
-            <td>{{cart.total}} VNĐ</td>
+            <td>{{carts.total}} VNĐ</td>
           </tr>
           <tr>
             <td colspan="4"></td>
-            <td><button type="submit" style="background-color: aquamarine;">Mua hàng</button></td>
+            <td><button type="button" id="buy-btn" style="background-color: aquamarine;">Mua hàng</button></td>
           </tr>
-        
       </tbody>
     </table>
   </div>
 </div>
+
+<form name="delete-game-form" method="POST"></form>
+<script>
+
+  var button = document.getElementById("buy-btn");
+            button.onclick = function(){
+                alert("Mua hàng thành công!");
+            }
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const deleteButtons = document.querySelectorAll(".delete-item");
+    let deleteForm = document.forms['delete-game-form']
+    
+  deleteButtons.forEach(function(button) {
+    button.addEventListener("click", function() {
+      const itemId = button.dataset.itemId;
+            deleteForm.action = '/cart/show/' + itemId + '?_method=DELETE';
+            deleteForm.submit()
+        .then((response) => {
+          if (response.ok) {
+            // Xóa hàng sản phẩm tương ứng khỏi giao diện
+            const row = button.closest("tr");
+            row.parentNode.removeChild(row);
+            return response.json();
+          }
+          throw new Error("Yêu cầu xóa sản phẩm thất bại");
+        })
+        .then((data) => {
+          console.log(data.message); // In thông báo thành công
+        })
+        .catch((error) => {
+          console.error("Lỗi khi xóa sản phẩm:", error);
+        });
+    });
+  });
+});
+
+</script>
